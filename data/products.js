@@ -4669,5 +4669,57 @@ window.PRODUCTS = [
     "boxSize": "Confirmar com fornecedor",
     "description": "Bolsa organizadora suspensa com 3 compartimentos em poliéster resistente. Ideal para guardar roupas, calçados ou acessórios economizando espaço; fixa-se facilmente em araras, varões ou portas de armário.",
     "isNew": true
+  },
+  {
+    "category": "7bike",
+    "categoryLabel": "7Bike",
+    "page": "collection-7ecom-bike-p001",
+    "image": "Imgens/Products/7bike/Z7.jpg",
+    "name": "Bicicleta Elétrica Urbana",
+    "model": "750W · 48V · 13Ah",
+    "code": "Z7",
+    "pieces": "Confirmar com fornecedor",
+    "boxSize": "Confirmar com fornecedor",
+    "description": "Bicicleta elétrica urbana com motor de 750W (48V) e bateria de 13Ah para deslocamentos diários. Pneus largos 20x4.0, freios a disco de 180mm com corte de energia, suspensão dianteira e farol com seta. Suporta até 180 kg. Disponível nas versões de marcha única e de 7 marchas.",
+    "isNew": true
+  },
+  {
+    "category": "7bike",
+    "categoryLabel": "7Bike",
+    "page": "collection-7ecom-bike-p002",
+    "image": "Imgens/Products/7bike/ATV20.jpg",
+    "name": "Fat Bike Elétrica",
+    "model": "1000W · 48V · 15Ah",
+    "code": "ATV20",
+    "pieces": "Confirmar com fornecedor",
+    "boxSize": "Confirmar com fornecedor",
+    "description": "Bicicleta elétrica fat bike com motor potente de 1000W (48V) e bateria de 15Ah. Freios hidráulicos a disco de 180mm, pneus robustos 20x4.0 e suspensão dianteira para maior estabilidade. Carga máxima de 180 kg, ideal para terrenos variados.",
+    "isNew": true
+  },
+  {
+    "category": "7bike",
+    "categoryLabel": "7Bike",
+    "page": "collection-7ecom-bike-p003",
+    "image": "Imgens/Products/7bike/EX-33.jpg",
+    "name": "Mini Moto Elétrica Infantil",
+    "model": "500W · 36V · 5.2Ah",
+    "code": "EX-33",
+    "pieces": "Confirmar com fornecedor",
+    "boxSize": "Confirmar com fornecedor",
+    "description": "Patinete/mini moto elétrica infantil com motor de 500W (36V) e bateria de 5.2Ah. Rodas de 14 polegadas, freio a disco com corte de energia e suspensão dianteira. Estrutura segura com carga máxima de 180 kg.",
+    "isNew": true
+  },
+  {
+    "category": "7home",
+    "categoryLabel": "7Home",
+    "page": "collection-7home-p001",
+    "image": "Imgens/Products/7home/FXM-0001.jpg",
+    "name": "Espelho de Parede",
+    "model": "113,5 x 81,5 cm",
+    "code": "FXM-0001",
+    "pieces": "Confirmar com fornecedor",
+    "boxSize": "Confirmar com fornecedor",
+    "description": "Espelho decorativo com moldura, em vidro com estrutura em liga de alumínio. Medidas aproximadas de 113,5 x 81,5 cm. Ideal para banheiros, quartos, halls de entrada ou ambientes comerciais. Acabamento leve e resistente.",
+    "isNew": true
   }
 ];

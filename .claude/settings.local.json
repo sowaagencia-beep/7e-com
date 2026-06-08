@@ -60,7 +60,11 @@
       "Bash(git remote *)",
       "Bash(git push *)",
       "Bash(node parse-new.mjs)",
-      "Bash(node finalize-new.mjs)"
+      "Bash(node finalize-new.mjs)",
+      "Bash(node add-catalog.mjs \"D:/Dropbox/SOWA AGENCIA/7-ECOM/PRODUTOS/08-06-2026/COLLECTION_7ECOM_BIKE.pdf\" 7bike)",
+      "Bash(node add-catalog.mjs \"D:/Dropbox/SOWA AGENCIA/7-ECOM/PRODUTOS/08-06-2026/COLLECTION_7ECOM_BIKE.pdf\" 7bike --photos \"D:/Dropbox/SOWA AGENCIA/7-ECOM/PRODUTOS/08-06-2026\")",
+      "Bash(node add-catalog.mjs \"D:/Dropbox/SOWA AGENCIA/7-ECOM/PRODUTOS/08-06-2026/COLLECTION_7HOME.pdf\" 7home --photos \"D:/Dropbox/SOWA AGENCIA/7-ECOM/PRODUTOS/08-06-2026\")",
+      "Bash(node deploy.mjs)"
     ]
   }
 }
