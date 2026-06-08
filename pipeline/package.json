@@ -1,0 +1,17 @@
+{
+  "name": "7ecom-pipeline",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Pipeline para adicionar produtos de catálogos PDF ao site 7E-COM e publicar via FTP.",
+  "scripts": {
+    "add": "node add-catalog.mjs",
+    "deploy": "node deploy.mjs"
+  },
+  "dependencies": {
+    "basic-ftp": "^5.0.5",
+    "mupdf": "^1.0.0",
+    "sharp": "^0.33.0",
+    "tesseract.js": "^5.0.0"
+  }
+}

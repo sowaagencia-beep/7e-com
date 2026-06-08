@@ -6,3 +6,13 @@
 # Sistema
 .DS_Store
 Thumbs.db
+
+# Pipeline (dependências e segredos NÃO vão para o git)
+pipeline/node_modules/
+pipeline/.work/
+pipeline/.ftp.json
+pipeline/*.traineddata
+node_modules/
+
+# Locks transitórios
+.claude/scheduled_tasks.lock
