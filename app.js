@@ -87,7 +87,7 @@ function renderHero() {
     const featured = [
         { category: '7bike', heroImage: 'Imgens/hero/hero-7bike.webp' },
         { category: '7pro', heroImage: 'Imgens/hero/hero-7pro.webp' },
-        { category: '7tech', heroImage: 'Imgens/hero/hero-7tech.webp', nameIncludes: 'Girat' },
+        { category: '7tech', heroImage: 'Imgens/hero/hero-7tech.webp', nameIncludes: 'SUPORTE GIRATÓRIO' },
     ];
     const picked = [];
     for (const f of featured) {

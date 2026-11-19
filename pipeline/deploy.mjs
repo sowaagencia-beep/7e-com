@@ -9,6 +9,9 @@
      node deploy.mjs            (envia o que mudou)
      node deploy.mjs --all      (força reenvio de tudo)
      node deploy.mjs --dry      (mostra o que enviaria, sem enviar)
+     node deploy.mjs --prune    (apaga no servidor os ficheiros que ja
+                                 nao existem localmente, SO dentro de
+                                 data/ logotipo/ Imgens/ - nunca na raiz)
 
    Credenciais: lidas de pipeline/.ftp.json (fora do git).
    ============================================================ */
@@ -21,6 +24,7 @@ const HERE = import.meta.dirname;
 const PROJECT = join(HERE, '..');
 const FORCE = process.argv.includes('--all');
 const DRY = process.argv.includes('--dry');
+const PRUNE = process.argv.includes('--prune');
 
 const cfgPath = join(HERE, '.ftp.json');
 if (!existsSync(cfgPath)) {
@@ -112,6 +116,45 @@ try {
     }
 
     console.log(`\n✅ DEPLOY: ${uploaded} enviados, ${skipped} já atualizados, ${failed} falhas.`);
+
+    // ---------- PRUNE ----------
+    if (PRUNE) {
+        console.log('\n--- Limpeza de ficheiros orfaos ---');
+        const locais = new Set(files.map(f => f.remote));
+        let apagados = 0, erros = 0;
+
+        // Percorre o remoto SO dentro das pastas geridas por nos.
+        async function varrer(remoteDir) {
+            // trava de seguranca: nunca sair das pastas geridas
+            const dentro = DIRS.some(d => {
+                const raiz = posix.join(REMOTE_ROOT, d);
+                return remoteDir === raiz || remoteDir.startsWith(raiz + '/');
+            });
+            if (!dentro) { console.log(`    (ignorado, fora do ambito: ${remoteDir})`); return; }
+
+            let itens;
+            try { itens = await client.list(remoteDir); }
+            catch (e) { console.log(`    ! nao deu para listar ${remoteDir}: ${e.message}`); return; }
+
+            for (const it of itens) {
+                if (it.name === '.' || it.name === '..') continue;
+                const rp = posix.join(remoteDir, it.name);
+                if (it.isDirectory) { await varrer(rp); continue; }
+                if (locais.has(rp)) continue;
+                if (DRY) { console.log('  apagaria:', rp); apagados++; continue; }
+                try {
+                    await client.remove(rp);
+                    apagados++;
+                    if (apagados % 25 === 0) console.log(`  apagados ${apagados}...`);
+                } catch (e) { console.log(`    ! falha ao apagar ${rp}: ${e.message}`); erros++; }
+            }
+        }
+
+        for (const d of DIRS) await varrer(posix.join(REMOTE_ROOT, d));
+        console.log(`\nLIMPEZA: ${apagados} ${DRY ? 'seriam apagados' : 'apagados'}, ${erros} falhas.`);
+        if (erros) process.exitCode = 1;
+    }
+
     if (failed) process.exitCode = 1;
 } catch (err) {
     console.error('\n❌ ERRO:', err.message);
