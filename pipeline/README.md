@@ -69,7 +69,8 @@ node deploy.mjs --dry      # mostra o que enviaria
 - Envia **só ficheiros novos/alterados** (compara tamanhos) → rápido.
 - **Reconecta sozinho** se a ligação cair.
 - **Não toca** nos ficheiros do WordPress no servidor.
-- Credenciais em `pipeline/.ftp.json` (fora do git).
+- Credenciais FTP em `7-ECOM/Secrects/7e-com_credenciais do servidor.txt` (fora do projeto e do git).
+- Token do GitHub em `7-ECOM/Secrects/TOKEN GIT.txt`.
 
 ---
 

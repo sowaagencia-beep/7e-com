@@ -13,7 +13,7 @@
                                  nao existem localmente, SO dentro de
                                  data/ logotipo/ Imgens/ - nunca na raiz)
 
-   Credenciais: lidas de pipeline/.ftp.json (fora do git).
+   Credenciais: lidas de <7-ECOM>/Secrects/7e-com_credenciais do servidor.txt
    ============================================================ */
 
 import { Client } from 'basic-ftp';
@@ -26,13 +26,35 @@ const FORCE = process.argv.includes('--all');
 const DRY = process.argv.includes('--dry');
 const PRUNE = process.argv.includes('--prune');
 
-const cfgPath = join(HERE, '.ftp.json');
+// Credenciais: ficheiro de texto na pasta Secrects (fora do projeto e do git)
+//   <7-ECOM>/Secrects/7e-com_credenciais do servidor.txt   (linhas "chave:valor")
+const SECRETS_DIR = join(PROJECT, '..', 'Secrects');
+const cfgPath = join(SECRETS_DIR, '7e-com_credenciais do servidor.txt');
 if (!existsSync(cfgPath)) {
-    console.error('Falta pipeline/.ftp.json com as credenciais FTP. Exemplo:');
-    console.error(JSON.stringify({ host:'ftp.7e-com.com.br', user:'w7e-com1', password:'***', port:21, remoteRoot:'/public_html' }, null, 2));
+    console.error('Falta o ficheiro de credenciais FTP: ' + cfgPath);
+    console.error('Formato (uma por linha):  host:...  Usuário de FTP:...  Senha:...  Porta:21');
     process.exit(1);
 }
-const CFG = JSON.parse(readFileSync(cfgPath, 'utf8'));
+function lerCredenciais(path) {
+    const kv = {};
+    for (const linha of readFileSync(path, 'utf8').split(/\r?\n/)) {
+        const i = linha.indexOf(':');
+        if (i > 0) kv[linha.slice(0, i).trim().toLowerCase()] = linha.slice(i + 1).trim();
+    }
+    const get = (...ks) => { for (const k of Object.keys(kv)) if (ks.some(x => k.includes(x))) return kv[k]; };
+    return {
+        host: get('host'),
+        user: get('usu', 'user'),
+        password: get('senha', 'pass'),
+        port: Number(get('porta', 'port')) || 21,
+        remoteRoot: '/public_html',
+    };
+}
+const CFG = lerCredenciais(cfgPath);
+if (!CFG.host || !CFG.user || !CFG.password) {
+    console.error('Credenciais incompletas em ' + cfgPath + ' (precisa de host, usuário e senha).');
+    process.exit(1);
+}
 const REMOTE_ROOT = CFG.remoteRoot || '/public_html';
 
 // Itens do NOSSO site (nunca toca em WordPress)
